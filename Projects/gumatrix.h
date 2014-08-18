@@ -6,7 +6,7 @@ class GUMatrix
 public:
     GUMatrix();
     ~GUMatrix();
-    GUMatrix(int countOfRow, int countOfCol, float* array);
+    GUMatrix(int countOfRow, int countOfCol, float array[]);
     GUMatrix* getTransponent();
 
 private:

@@ -1,21 +1,25 @@
 #include "gumatrix.h"
+#include <stdexcept>
+#include <array>
+
 // Constructors
 GUMatrix::GUMatrix()
 {
 }
-GUMatrix::GUMatrix(int countOfRow, int countOfCol, float* array)
+GUMatrix::GUMatrix(int countOfRow, int countOfCol, float array[])
 {
     _countOfRow = countOfRow;
     _countOfCol = countOfCol;
     _arraySize = _countOfRow * _countOfCol;
-    std::copy(std::begin(array), std::end(array), std::begin(_array));
+    _array = new float[_arraySize];
+    for (int i = 0; i < _arraySize; i++) { _array[i] = array[i]; }
 }
 GUMatrix::~GUMatrix()
 {
     delete []_array;
 }
 // Public methods
-GUMatrix::GUMatrix* getTransponent()
+GUMatrix* GUMatrix::getTransponent()
 {
     float *transponentArray = new float[_arraySize];
     int k = 0;
@@ -25,7 +29,7 @@ GUMatrix::GUMatrix* getTransponent()
         if ((i + _countOfRow) % _countOfRow == 0)
         {
             transponentArray[i] = transponentArray[k++];
-            int offsey = _countOfCol;
+            offset = _countOfCol;
         }
         else
         {
